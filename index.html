@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SweetConnect - Interactive Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-heart"></i> SweetConnect</h1>
+            <div class="subtitle">A warm space for sharing and caring</div>
+        </header>
+        
+        <section class="login-section" id="loginSection">
+            <div class="login-form">
+                <h2>Welcome Back!</h2>
+                <p>Please log in to continue</p>
+                
+                <div class="user-type">
+                    <div class="user-option active" data-type="admin">Admin</div>
+                    <div class="user-option" data-type="shrreya">Shrreya</div>
+                    <div class="user-option" data-type="shared">Shared User</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter your email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password">
+                </div>
+                
+                <div class="form-group" id="nameGroup" style="display: none;">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" placeholder="Enter your name">
+                </div>
+                
+                <button id="loginBtn"><i class="fas fa-sign-in-alt"></i> Log In / Register</button>
+                
+                <p style="margin-top: 20px; text-align: center; font-size: 0.9rem;">
+                    First time? The system will create your account automatically.
+                </p>
+            </div>
+        </section>
+        
+        <section class="dashboard" id="dashboard">
+            <div class="user-info">
+                <div>
+                    <h3 id="welcomeUser">Welcome, User!</h3>
+                    <p id="userRole">Role: Shared User</p>
+                </div>
+                <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card" id="sweetTasks">
+                    <div class="feature-icon">
+                        <i class="fas fa-candy-cane"></i>
+                    </div>
+                    <h3 class="feature-title">Sweetly Tasks</h3>
+                    <p>Order sweet tasks and make someone's day brighter!</p>
+                </div>
+                
+                <div class="feature-card" id="angerExplaining">
+                    <div class="feature-icon">
+                        <i class="fas fa-angry"></i>
+                    </div>
+                    <h3 class="feature-title">Anger Explaining</h3>
+                    <p>Share what's bothering you in a safe space.</p>
+                </div>
+                
+                <div class="feature-card" id="anyIssues">
+                    <div class="feature-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3 class="feature-title">Any Issues with UR's</h3>
+                    <p>Discuss any issues you're facing with your relationships.</p>
+                </div>
+            </div>
+            
+            <div class="chat-section">
+                <div class="chat-header">
+                    <h3><i class="fas fa-comments"></i> Messages</h3>
+                    <span id="onlineStatus"><i class="fas fa-circle" style="color: #4CAF50;"></i> Shrreya is online</span>
+                </div>
+                
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message received">
+                        <p>Hello! How can I help you today?</p>
+                        <div class="message-time">Shrreya, <span class="time">10:30 AM</span></div>
+                    </div>
+                </div>
+                
+                <div class="chat-input">
+                    <input type="text" id="messageInput" placeholder="Type your message here...">
+                    <button id="sendMessageBtn"><i class="fas fa-paper-plane"></i> Send</button>
+                </div>
+            </div>
+            
+            <div class="admin-panel" id="adminPanel">
+                <h3><i class="fas fa-cogs"></i> Admin Controls</h3>
+                <p>Manage website features and users</p>
+                
+                <div class="admin-controls">
+                    <div class="admin-control">
+                        <h4>Add New Feature</h4>
+                        <input type="text" id="newFeatureName" placeholder="Feature name">
+                        <textarea id="newFeatureDesc" placeholder="Feature description"></textarea>
+                        <button id="addFeatureBtn" style="width: 100%;">Add Feature</button>
+                    </div>
+                    
+                    <div class="admin-control">
+                        <h4>User Management</h4>
+                        <p>Currently registered users: <span id="userCount">3</span></p>
+                        <button id="viewUsersBtn" style="width: 100%; margin-top: 10px;">View Users</button>
+                    </div>
+                    
+                    <div class="admin-control">
+                        <h4>Website Settings</h4>
+                        <button id="updateThemeBtn" style="width: 100%; margin-bottom: 5px;">Update Theme</button>
+                        <button id="backupDataBtn" style="width: 100%;">Backup Data</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <div class="notification" id="notification">
+        <i class="fas fa-bell"></i> <span id="notificationText">Notification message</span>
+    </div>
+
+    <!-- Modal for feature inputs -->
+    <div class="modal" id="featureModal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Feature Title</h3>
+            <p id="modalPrompt">Please provide your input</p>
+            <textarea id="modalInput" placeholder="Type your response here..."></textarea>
+            <div class="modal-buttons">
+                <button id="modalSubmit">Submit</button>
+                <button id="modalCancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

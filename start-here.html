@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SweetConnect - Interactive Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Paste ALL your CSS from styles.css here */
+        :root {
+            --yellow: #FFD166;
+            --orange: #FF9E64;
+            --red: #EF5B5B;
+            --light-yellow: #FFF5E1;
+            --dark-orange: #E67E51;
+            --dark-red: #D14949;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--light-yellow) 0%, #FFE8C8 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(239, 91, 91, 0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 90vh;
+        }
+        
+        /* CONTINUE WITH THE REST OF YOUR CSS FROM styles.css */
+        /* Copy everything from your styles.css file and paste it here */
+        
+    </style>
+</head>
+<body>
+    <!-- Copy the entire HTML content from your index.html file -->
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-heart"></i> SweetConnect</h1>
+            <div class="subtitle">A warm space for sharing and caring</div>
+        </header>
+        
+        <section class="login-section" id="loginSection">
+            <!-- PASTE YOUR ENTIRE LOGIN SECTION HTML HERE -->
+        </section>
+        
+        <section class="dashboard" id="dashboard">
+            <!-- PASTE YOUR ENTIRE DASHBOARD SECTION HTML HERE -->
+        </section>
+        
+        <div class="notification" id="notification">
+            <i class="fas fa-bell"></i> <span id="notificationText">Notification message</span>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script>
+        // PASTE YOUR ENTIRE script.js CONTENT HERE
+        // Copy everything from your script.js file and paste it here
+        
+        // API base URL
+        const API_BASE = 'http://localhost:5000/api';
+
+        // DOM Elements
+        const loginSection = document.getElementById('loginSection');
+        const dashboard = document.getElementById('dashboard');
+        const loginBtn = document.getElementById('loginBtn');
+        // ... continue with the rest of your JavaScript code
+    </script>
+</body>
+</html>
