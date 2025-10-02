@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: sweetconnect-backend
+    env: node
+    plan: free
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        value: https://sweetconnect-frontend.onrender.com
+
+  - type: web
+    name: sweetconnect-frontend
+    env: static
+    buildCommand: cd frontend && npm install
+    staticPublishPath: ./frontend
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://sweetconnect-backend.onrender.com
